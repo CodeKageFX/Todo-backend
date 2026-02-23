@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import prisma from "../lib/prisma.ts";
-import { AppError } from "../lib/AppError.ts";
+import prisma from "../lib/prisma";
+import { AppError } from "../lib/AppError";
 
 export type UserRole = "user" | "admin"
 export interface TokenPayload {

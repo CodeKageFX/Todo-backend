@@ -1,5 +1,5 @@
 import type { Response, Request, NextFunction } from "express"
-import * as TodosServices from "../services/todo.services.ts"
+import * as TodosServices from "../services/todo.services"
 
 export async function getTodos(req: Request, res: Response, next: NextFunction) {
     try {

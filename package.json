@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node src/server.ts",
-    "build": "prisma generate && npx prisma migrate deploy --schema=./prisma/schema.prisma && tsc",
+    "build": "prisma generate && tsc",
     "start": "node dist/server.js",
-    "seed": "ts-node src/seed.ts"
+    "migrate": "prisma migrate deploy"
   },
   "keywords": [],
   "author": "",

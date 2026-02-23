@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import { verifyToken, type TokenPayload } from "../services/auth.services.ts";
-import { AppError } from "../lib/AppError.ts";
+import { verifyToken, type TokenPayload } from "../services/auth.services";
+import { AppError } from "../lib/AppError";
 
 declare global {
     namespace Express {

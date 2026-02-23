@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import * as AuthServices from "../services/auth.services.ts"
-import { AppError } from "../lib/AppError.ts";
+import * as AuthServices from "../services/auth.services"
+import { AppError } from "../lib/AppError";
 
 
 export async function register(req: Request, res: Response, next:NextFunction) {

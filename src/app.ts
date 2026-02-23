@@ -1,9 +1,9 @@
 import express, { type Request, type Response, type NextFunction } from "express"
-import todoRouter from "./routes/todo.routes.ts"
-import { AppError } from "./lib/AppError.ts"
-import { logger } from "./middleware/create.ts"
-import { errorHandler } from "./middleware/errorHandler.ts"
-import authRouter from "./routes/auth.routes.ts"
+import todoRouter from "./routes/todo.routes"
+import { AppError } from "./lib/AppError"
+import { logger } from "./middleware/create"
+import { errorHandler } from "./middleware/errorHandler"
+import authRouter from "./routes/auth.routes"
 
 const app = express()
 

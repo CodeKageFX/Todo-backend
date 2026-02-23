@@ -1,6 +1,6 @@
-import prisma from "../lib/prisma.ts";
+import prisma from "../lib/prisma";
 import { Prisma } from "@prisma/client";
-import { AppError } from "../lib/AppError.ts";
+import { AppError } from "../lib/AppError";
 
 export type Status = "pending" | "completed"
 export type Priority = "low" | "medium" | "high"

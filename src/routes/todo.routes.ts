@@ -1,6 +1,6 @@
 import { Router } from "express";
-import * as TodosController from "../controller/todo.controller.ts"
-import { authenticate, authorizeRoles } from "../middleware/authenticate.ts";
+import * as TodosController from "../controller/todo.controller"
+import { authenticate, authorizeRoles } from "../middleware/authenticate";
 
 
 const todoRouter = Router()
