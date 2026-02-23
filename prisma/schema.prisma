@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum StatusEnum {
+  pending
+  completed
+}
+
+enum PriorityEnum {
+  low
+  medium
+  high
+}
+
+model Todo {
+  id          Int           @id @default(autoincrement())
+  title       String
+  description String?
+  status      StatusEnum    @default(pending)
+  priority    PriorityEnum  @default(medium)
+  createdAt   DateTime      @default(now())
+}
+
+enum RoleEnum {
+  user
+  admin
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  role      RoleEnum  @default(user)
+  createdAt DateTime  @default(now())
+}
