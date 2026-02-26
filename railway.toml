@@ -4,4 +4,4 @@ buildCommand = "npm install && npm run build && npx prisma migrate deploy"
 
 [deploy]
 startCommand = "npm start"
-restartPolicyType = "on-failure"
+restartPolicyType = "ON_FAILURE"
