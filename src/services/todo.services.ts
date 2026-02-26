@@ -21,16 +21,17 @@ export async function createTodos(
     status: Status,
     priority: Priority,
     description?: string,
+    dueDate?: string | null
 ): Promise<Todo> {
-        return await prisma.todo.create({
-            data: {
-                title,
-                status,
-                priority,
-                ...(description !== undefined && { description } )
-            }
-        })
-    
+    return await prisma.todo.create({
+        data: {
+            title,
+            status,
+            priority,
+            description: description ?? null,
+            dueDate: dueDate ?? new Date(),
+        }
+    });
 }
 
 export async function deleteTodos(id:number):Promise<void> {
