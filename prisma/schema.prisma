@@ -12,6 +12,7 @@ datasource db {
 
 enum StatusEnum {
   pending
+  inProgress
   completed
 }
 
@@ -27,7 +28,10 @@ model Todo {
   description String?
   status      StatusEnum    @default(pending)
   priority    PriorityEnum  @default(medium)
+  dueDate     DateTime
+  order       Int           @default(0)
   createdAt   DateTime      @default(now())
+  updatedAT   DateTime      @updatedAt
 }
 
 enum RoleEnum {
