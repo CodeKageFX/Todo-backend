@@ -4,11 +4,21 @@ import { AppError } from "./lib/AppError"
 import { logger } from "./middleware/create"
 import { errorHandler } from "./middleware/errorHandler"
 import authRouter from "./routes/auth.routes"
+import { authLimiter, apiLimiter } from "./middleware/rateLimit"
+import cors from "cors"
 
 const app = express()
 
+app.use(cors({
+    origin: "http://localhost:3001",
+    credentials: true
+}))
+
 app.use(express.json())
 app.use(logger)
+
+app.use("/api", apiLimiter)
+app.use("/auth", authLimiter)
 
 app.get("/", (_req, res) => {
     res.json({message: "Server active"})
