@@ -3,18 +3,22 @@ import * as TodosServices from "../services/todo.services"
 
 export async function getTodos(req: Request, res: Response, next: NextFunction) {
     try {
-        console.log("userId:", req.user?.id)
-        console.log("body:", req.body)
         const userId = req.user!.id // ← from JWT token via middleware
-        const { status, priority } = req.query
+        const { status, priority, page, limit } = req.query
 
-       const todos = await TodosServices.getTodos(
-        userId,
-        status as TodosServices.Status,
-        priority as TodosServices.Priority
+       const results = await TodosServices.getTodos(
+            userId,
+            status as TodosServices.Status,
+            priority as TodosServices.Priority,
+            page ? parseInt(page as string): 1,
+            limit ? parseInt(limit as string) : 10
        )
 
-       res.json({message: "Todos fetched", result: todos})
+       res.json({
+            message: "Todos fetched",
+            result: results.todos,
+            pagination: results.pagination
+       })
     } catch(err) {
         next(err)
     }

@@ -7,7 +7,13 @@ export type Priority = "low" | "medium" | "high"
 
 export type Todo = Prisma.TodoGetPayload<{}>
 
-export async function getTodos(userId: number ,status?: Status, priority?: Priority): Promise<Todo[]> {
+export async function getTodos(
+    userId: number,
+    status?: Status,
+    priority?: Priority,
+    page: number = 1,
+    limit: number = 10
+) {
     const where: Prisma.TodoWhereInput = {
         userId // ← always filter by user
     }
@@ -15,10 +21,28 @@ export async function getTodos(userId: number ,status?: Status, priority?: Prior
     if (status) where.status = status as StatusEnum
     if (priority) where.priority = priority as PriorityEnum
 
-    return await prisma.todo.findMany({
-        where,
-        orderBy: { createdAt: "desc" }
-    })
+    const [todos, total] = await Promise.all([
+        prisma.todo.findMany({
+            where,
+            orderBy: { createdAt: "desc" },
+            skip: ( page - 1 ) * limit,
+            take: limit
+        }),
+
+        prisma.todo.count({ where })
+    ])
+
+    return {
+        todos,
+        pagination: {
+            total,
+            page,
+            limit,
+            totalPages: Math.ceil(total / limit),
+            hasNext: page < Math.ceil(total / limit),
+            hasPrev: page > 1
+        }
+    }
 }
 
 export async function createTodos(

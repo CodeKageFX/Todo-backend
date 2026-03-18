@@ -1,13 +1,16 @@
 import express, { type Request, type Response, type NextFunction } from "express"
 import todoRouter from "./routes/todo.routes"
 import { AppError } from "./lib/AppError"
-import { logger } from "./middleware/create"
+import { logger } from "./middleware/logger"
 import { errorHandler } from "./middleware/errorHandler"
 import authRouter from "./routes/auth.routes"
 import { authLimiter, apiLimiter } from "./middleware/rateLimit"
 import cors from "cors"
+import helmet from "helmet"
 
 const app = express()
+
+app.use(helmet)
 
 app.use(cors({
     origin: "http://localhost:3001",
